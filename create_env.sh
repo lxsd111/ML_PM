@@ -1,16 +1,19 @@
-# Install Python 3.9 if not available
-pyenv install 3.9 --skip-existing
+#!/bin/zsh
+set -euo pipefail
+cd "$(dirname "$0")"
 
-# Create virtual environment
-pyenv local 3.9
-$(pyenv which python) -m venv .venv
+PY="/opt/homebrew/opt/python@3.9/bin/python3.9"
+if [ ! -x "$PY" ]; then
+  echo "Installing python@3.9 via Homebrew..."
+  brew install python@3.9
+fi
 
-# Activate and install
+rm -rf .venv
+"$PY" -m venv .venv
 source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-pip install -e .
-pip install ipykernel
-python -m ipykernel install --user --name from-speech-to-markets --display-name "Python (from-speech-to-markets)"
 
-echo "Done! Activate with: source .venv/bin/activate"
+python -V
+pip install --upgrade pip
+[ -f requirements.txt ] && pip install -r requirements.txt
+
+echo "Done. Activate with: source .venv/bin/activate"
