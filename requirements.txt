@@ -28,3 +28,5 @@ sentence_transformers==5.1.1
 yfinance==0.2.66
 rapidfuzz==3.13.0
 umap-learn==0.5.9.post2
+ruptures
+xgboost

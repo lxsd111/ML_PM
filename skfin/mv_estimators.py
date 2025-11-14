@@ -162,4 +162,6 @@ class TimingMeanVariance(BaseEstimator):
             h = np.clip(
                 X / np.sqrt(self.V_), a_min=self.a_min, a_max=self.a_max
             ) / np.sqrt(self.V_)
+
+
         return h
